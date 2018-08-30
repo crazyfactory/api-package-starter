@@ -20,7 +20,7 @@ class UserControllerTest extends TestBase
 		$mockRequest = Request::create("/", "POST");
 		$mock = $this->createMock(CombinationManager::class);
 		$mockData = [
-			'id' => 1,
+			'id' => 99,
 			'product_id' => 1,
 			'combinations' => ['color' => 'WH', 'diameter' => 1.2]
 		];
@@ -34,6 +34,6 @@ class UserControllerTest extends TestBase
 		$this->assertEquals(false, $response->status);
 		$this->assertEquals(3, $response->id);
 		$this->assertEquals("my name", $response->name);
-		$this->assertTrue($response->combinations[0]['id'] === 1);
+		$this->assertTrue($response->combinations[0]['id'] === 99);
 	}
 }
