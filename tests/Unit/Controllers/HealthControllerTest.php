@@ -90,7 +90,6 @@ class HealthControllerTest extends TestCase
 		});
 		$controller = new HealthController();
 		$response = $controller->check();
-		var_dump($response);
 		$this->assertFalse($response['healthy']);
 	}
 }
