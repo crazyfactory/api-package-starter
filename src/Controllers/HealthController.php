@@ -13,8 +13,8 @@ class HealthController extends BaseController
 		];
 		try {
 			$this->di->resolveCombinationManager();
-			$this->di->resolveCategoryManager();
 			$status['combination'] = true;
+			$this->di->resolveCategoryManager();
 			$status['category'] = true;
 		} catch (\Exception $exception) {
 		}
@@ -24,12 +24,13 @@ class HealthController extends BaseController
 				$status['db'] = true;
 			}
 		} catch (\Exception $e) {
-			die($e->getMessage());
 		}
 		$total = count($status);
 		$healthy = count(array_filter($status));
 		if ($total === $healthy) {
 			$status['healthy'] = true;
+		} else {
+			$status['healthy'] = false;
 		}
 		return $status;
 	}

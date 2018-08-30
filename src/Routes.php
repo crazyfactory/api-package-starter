@@ -9,10 +9,6 @@ use Symfony\Component\Routing\RouteCollection;
 
 class Routes
 {
-	public function __construct()
-	{
-	}
-
 	public function registerRoutes(RouteCollection $routeCollection)
 	{
 		$routeCollection->add("test", new Route("/user/{id}/profile", ['_controller' => UserController::class . "::test"]));

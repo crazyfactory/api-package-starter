@@ -23,12 +23,21 @@
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./src</directory>
+            <exclude>
+                <directory suffix=".php">./src/Contracts</directory>
+                <directory suffix=".php">./src/Exceptions</directory>
+                <directory suffix=".php">./src/Mocks</directory>
+                <directory suffix=".php">./src/Di</directory>
+                <directory suffix=".php">./src/Exceptions</directory>
+                <directory suffix=".php">./src/App.php</directory>
+                <directory suffix=".php">./src/Routes.php</directory>
+            </exclude>
         </whitelist>
     </filter>
 
     <logging>
-        <log type="coverage-html" target="coverage/html" lowUpperBound="35" highLowerBound="70"/>
+        <log type="coverage-html" target="coverage/html" lowUpperBound="35" highLowerBound="80"/>
         <log type="coverage-clover" target="coverage/clover.xml"/>
-        <log type="coverage-text" target="php://stdout" lowUpperBound="35" highLowerBound="70"/>
+        <log type="coverage-text" target="php://stdout" lowUpperBound="35" highLowerBound="80"/>
     </logging>
 </phpunit>
