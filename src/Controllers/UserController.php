@@ -16,12 +16,10 @@ class UserController extends BaseController
 	public function test(Request $request, $id): CategoryModel
 	{
 		$model = new CategoryModel();
-		$model->combinations = $this->di->resolveCombinationManager()->getCombinations(3);
+		$model->combinations = $this->di->resolveCombinationManager()->getCombinations($id);
 		$model->status = false;
 		$model->id = 3;
 		$model->name = $request->request->get("name");
 		return $model;
 	}
 }
-
-;

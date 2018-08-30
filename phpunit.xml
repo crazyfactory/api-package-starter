@@ -24,11 +24,11 @@
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./src</directory>
             <exclude>
+                <directory suffix=".php">./src/Console</directory>
                 <directory suffix=".php">./src/Contracts</directory>
-                <directory suffix=".php">./src/Exceptions</directory>
-                <directory suffix=".php">./src/Mocks</directory>
                 <directory suffix=".php">./src/Di</directory>
                 <directory suffix=".php">./src/Exceptions</directory>
+                <directory suffix=".php">./src/Mocks</directory>
                 <directory suffix=".php">./src/App.php</directory>
                 <directory suffix=".php">./src/Routes.php</directory>
             </exclude>

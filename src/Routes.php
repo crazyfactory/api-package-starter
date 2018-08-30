@@ -11,7 +11,7 @@ class Routes
 {
 	public function registerRoutes(RouteCollection $routeCollection)
 	{
-		$routeCollection->add("test", new Route("/user/{id}/profile", ['_controller' => UserController::class . "::test"]));
+		$routeCollection->add("test", new Route("/user/{id}/profile", ['_controller' => UserController::class . "::test"], [], [], null, [], ['GET']));
 		$routeCollection->add("health", new Route("/health", ['_controller' => HealthController::class . "::check"]));
 		return $routeCollection;
 	}
