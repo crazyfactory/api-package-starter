@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 use App\Contracts\ApplicationManager;
@@ -27,7 +28,8 @@ class App
 	/**
 	 * @throws \Exception
 	 */
-	public function handle() {
+	public function handle()
+	{
 		try {
 			$matcher = $this->di->resolveUrlMatcher();
 			$request = $this->di->resolveRequest();
@@ -46,7 +48,8 @@ class App
 	 * @param $arguments
 	 * @throws \Exception
 	 */
-	protected function dispatch($controller, $arguments) {
+	protected function dispatch($controller, $arguments)
+	{
 		$request = $this->di->resolveRequest();
 		if ($request->getContentType() === "json") {
 			$data = $request->getContent();

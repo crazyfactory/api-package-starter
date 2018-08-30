@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Mocks;
 
 use App\Contracts\CombinationManager;

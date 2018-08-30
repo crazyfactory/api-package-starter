@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Controllers;
 
 class HealthController extends BaseController
 {
-	public function check() {
+	public function check()
+	{
 		$status = [
 			'combination' => false,
 			'category' => false,
@@ -14,7 +16,8 @@ class HealthController extends BaseController
 			$this->di->resolveCategoryManager();
 			$status['combination'] = true;
 			$status['category'] = true;
-		} catch (\Exception $exception) {}
+		} catch (\Exception $exception) {
+		}
 		try {
 			$applicationManager = $this->di->resolveApplicationManager();
 			if ($applicationManager->checkDbHealth()) {

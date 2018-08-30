@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 use App\Controllers\HealthController;
@@ -12,7 +13,8 @@ class Routes
 	{
 	}
 
-	public function registerRoutes(RouteCollection $routeCollection) {
+	public function registerRoutes(RouteCollection $routeCollection)
+	{
 		$routeCollection->add("test", new Route("/user/{id}/profile", ['_controller' => UserController::class . "::test"]));
 		$routeCollection->add("health", new Route("/health", ['_controller' => HealthController::class . "::check"]));
 		return $routeCollection;

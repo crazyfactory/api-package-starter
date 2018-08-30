@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Models\CategoryModel;
@@ -12,7 +13,8 @@ class UserController extends BaseController
 	 * @return CategoryModel
 	 * @throws \Exception
 	 */
-	public function test(Request $request, $id): CategoryModel {
+	public function test(Request $request, $id): CategoryModel
+	{
 		$model = new CategoryModel();
 		$model->combinations = $this->di->resolveCombinationManager()->getCombinations(3);
 		$model->status = false;
@@ -20,4 +22,6 @@ class UserController extends BaseController
 		$model->name = $request->request->get("name");
 		return $model;
 	}
-};
+}
+
+;
