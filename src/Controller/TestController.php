@@ -1,9 +1,7 @@
 <?php
 namespace App\Controller;
 
-use App\Di\Di;
-
-class TestController
+class TestController extends BaseController
 {
 	/**
 	 * @param $id
@@ -11,7 +9,6 @@ class TestController
 	 * @throws \Exception
 	 */
 	public function test($id) {
-		$di = Di::getInstance();
-		return $di->resolveCategoryManager()->getCategories();
+		return $this->di->resolveCategoryManager()->getCategories();
 	}
 };
