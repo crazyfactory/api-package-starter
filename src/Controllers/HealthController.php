@@ -24,8 +24,8 @@ class HealthController extends BaseController
 			die($e->getMessage());
 		}
 		$total = count($status);
-		$truthy = count(array_filter($status));
-		if ($total === $truthy) {
+		$healthy = count(array_filter($status));
+		if ($total === $healthy) {
 			$status['healthy'] = true;
 		}
 		return $status;

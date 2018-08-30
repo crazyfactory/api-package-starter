@@ -64,6 +64,11 @@ class Di
 		$this->set(Services::APPLICATION_MANAGER, $applicationManager);
 	}
 
+	/**
+	 * @param $id
+	 * @return object
+	 * @throws \Exception
+	 */
 	public function get($id) {
 		return $this->containerInstance->get($id);
 	}
