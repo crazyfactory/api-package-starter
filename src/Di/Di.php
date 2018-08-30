@@ -18,11 +18,11 @@ class Di
 	/**
 	 * @var Di $container
 	 */
-	private static $container;
+	protected static $container;
 	/**
 	 * @var ContainerBuilder $containerInstance
 	 */
-	private $containerInstance;
+	protected $containerInstance;
 
 	/**
 	 * @return Di
@@ -33,6 +33,10 @@ class Di
 			self::$container = new self(new ContainerBuilder());
 		}
 		return self::$container;
+	}
+
+	public static function overWriteInstance(Di $di) {
+		self::$container = $di;
 	}
 
 	/**
@@ -49,20 +53,26 @@ class Di
 	public function register($id, $class) {
 		$this->containerInstance->register($id, $class);
 	}
+
 	public function set($id, $instance) {
 		$this->containerInstance->set($id, $instance);
 	}
+
 	public function setApplicationManager(ApplicationManager $applicationManager) {
-		$this->set("category_manager", $applicationManager->getCategoryManager());
-		$this->set("combination_manager", $applicationManager->getCombinationManager());
-		$this->set("application_manager", $applicationManager);
+		$this->set(Services::CATEGORY_MANAGER, $applicationManager->getCategoryManager());
+		$this->set(Services::COMBINATION_MANAGER, $applicationManager->getCombinationManager());
+		$this->set(Services::APPLICATION_MANAGER, $applicationManager);
+	}
+
+	public function get($id) {
+		return $this->containerInstance->get($id);
 	}
 	/**
 	 * @return CategoryManager
 	 * @throws \Exception
 	 */
 	public function resolveCategoryManager(): CategoryManager {
-		$categoryManager = $this->containerInstance->get("category_manager");
+		$categoryManager = $this->containerInstance->get(Services::CATEGORY_MANAGER);
 		if (!$categoryManager instanceof CategoryManager) {
 			throw new \Exception("Category Manager not found");
 		}
@@ -74,7 +84,7 @@ class Di
 	 * @throws \Exception
 	 */
 	public function resolveCombinationManager(): CombinationManager {
-		$combinationManager = $this->containerInstance->get("combination_manager");
+		$combinationManager = $this->containerInstance->get(Services::COMBINATION_MANAGER);
 		if (!$combinationManager instanceof CombinationManager) {
 			throw new \Exception("Category Manager not found");
 		}
@@ -86,7 +96,7 @@ class Di
 	 * @throws \Exception
 	 */
 	public function resolveApplicationManager(): ApplicationManager {
-		$applicationManager = $this->containerInstance->get("application_manager");
+		$applicationManager = $this->containerInstance->get(Services::APPLICATION_MANAGER);
 		if (!$applicationManager instanceof ApplicationManager) {
 			throw new \Exception("Application Manager not found");
 		}
@@ -166,9 +176,11 @@ class Di
 	private function registerArgumentResolver() {
 		$this->register("argument_resolver", ArgumentResolver::class);
 	}
+
 	private function registerControllerResolver() {
 		$this->register("controller_resolver", ControllerResolver::class);
 	}
+
 	private function registerRoutes(): void {
 		$routeCollection = new RouteCollection();
 		$routeCollection = (new Routes())->registerRoutes($routeCollection);
