@@ -9,6 +9,7 @@
 namespace App\Tests\Unit\Models;
 
 use App\Tests\Unit\Models\mocks\MockModel;
+use App\Tests\Unit\Models\mocks\MockModelBasic;
 use PHPUnit\Framework\TestCase;
 
 class MockModelTest extends TestCase
@@ -42,5 +43,14 @@ class MockModelTest extends TestCase
 		$this->assertTrue($model->status);
 		$this->assertEquals($model->name, "plugs");
 		$this->assertEquals($model->id, 1);
+	}
+	public function testMockBasicModel() {
+		$model = new MockModelBasic();
+		$model->name = "something";
+		$model->email = "something@.cc";
+		$jsonModel = json_decode($model->__toString(), true);
+		$this->assertTrue($jsonModel['name'] === "something");
+		$this->assertTrue($jsonModel['email'] === "something@.cc");
+		$this->assertFalse($model->validate());
 	}
 }
