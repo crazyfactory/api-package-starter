@@ -11,8 +11,33 @@ class Routes
 {
 	public function registerRoutes(RouteCollection $routeCollection)
 	{
-		$routeCollection->add("test", new Route("/user/{id}/profile", ['_controller' => UserController::class . "::test"], [], [], null, [], ['GET']));
-		$routeCollection->add("health", new Route("/health", ['_controller' => HealthController::class . "::check"]));
+		$routeCollection->add("test", $this->get('/user/{id}/profile', UserController::class, 'test'));
+		$routeCollection->add("health", $this->get('/health', HealthController::class, 'check'));
 		return $routeCollection;
+	}
+
+	private function get(string $path, string $controller, string $method)
+	{
+		return $this->withVerb($path, $controller, $method, ['GET']);
+	}
+
+	private function post(string $path, string $controller, string $method)
+	{
+		return $this->withVerb($path, $controller, $method, ['POST']);
+	}
+
+	private function delete(string $path, string $controller, string $method)
+	{
+		return $this->withVerb($path, $controller, $method, ['DELETE']);
+	}
+
+	private function patch(string $path, string $controller, string $method)
+	{
+		return $this->withVerb($path, $controller, $method, ['PATCH']);
+	}
+
+	private function withVerb(string $path, string $controller, string $method, array $verb = [])
+	{
+		return new Route($path, ['_controller' => $controller . '::' . $method], [], [], null, [], $verb);
 	}
 }
