@@ -52,16 +52,20 @@ class Di
 	public function set($id, $instance) {
 		$this->containerInstance->set($id, $instance);
 	}
+	public function setApplicationManager(ApplicationManager $applicationManager) {
+		$this->containerInstance->set("category_manager", $applicationManager->getCategoryManager());
+		$this->containerInstance->set("combination_manager", $applicationManager->getCombinationManager());
+	}
 	/**
 	 * @return CategoryManager
 	 * @throws \Exception
 	 */
 	public function resolveCategoryManager(): CategoryManager {
-		/**
-		 * @var ApplicationManager $applicationManager
-		 */
-		$applicationManager = $this->containerInstance->get("application_manager");
-		return $applicationManager->getCategoryManager();
+		$categoryManager = $this->containerInstance->get("category_manager");
+		if (!$categoryManager instanceof CategoryManager) {
+			throw new \Exception("Category Manager not found");
+		}
+		return $categoryManager;
 	}
 
 	/**
@@ -69,11 +73,11 @@ class Di
 	 * @throws \Exception
 	 */
 	public function resolveCombinationManager(): CombinationManager {
-		/**
-		 * @var ApplicationManager $applicationManager
-		 */
-		$applicationManager = $this->containerInstance->get("application_manager");
-		return $applicationManager->getCombinationManager();
+		$combinationManager = $this->containerInstance->get("category_manager");
+		if (!$combinationManager instanceof CombinationManager) {
+			throw new \Exception("Category Manager not found");
+		}
+		return $combinationManager;
 	}
 
 	/**

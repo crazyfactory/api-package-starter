@@ -21,7 +21,7 @@ class App
 	{
 		(new Handler())->register();
 		$this->di = Di::getInstance();
-		$this->di->set('application_manager', $applicationManager);
+		$this->di->setApplicationManager($applicationManager);
 	}
 
 	/**
@@ -40,7 +40,19 @@ class App
 			die("route not found");
 		}
 	}
+
+	/**
+	 * @param $controller
+	 * @param $arguments
+	 * @throws \Exception
+	 */
 	protected function dispatch($controller, $arguments) {
+		$request = $this->di->resolveRequest();
+		if ($request->getContentType() === "json") {
+			$data = $request->getContent();
+			$request->request->replace(json_decode($data, true));
+			$this->di->set("request", $request);
+		}
 		$response = call_user_func_array($controller, $arguments);
 		if ($response instanceof Response) {
 			$response->send();

@@ -15,7 +15,7 @@ class Handler
 		set_error_handler(function($num, $str, $file, $line, $context = null) {
 			$this->handleError($num, $str, $file, $line, $context);
 		});
-		set_exception_handler(function(\Exception $e) {
+		set_exception_handler(function($e) {
 			$this->handleException($e);
 		});
 	}
@@ -29,10 +29,10 @@ class Handler
 		$e = new ErrorException($str, 0, $num, $file, $line, $context);
 		$this->handleException($e);
 	}
-	protected function handleException(\Exception $e) {
+	protected function handleException($e) {
 		$this->render($e);
 	}
-	protected function render(\Exception $exception) {
+	protected function render($exception) {
 		$whoops = new Run();
 		$whoops->pushHandler(new PrettyPageHandler());
 		$whoops->handleException($exception);
