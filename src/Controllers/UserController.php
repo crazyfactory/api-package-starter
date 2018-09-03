@@ -19,7 +19,7 @@ class UserController extends BaseController
 		$model->combinations = $this->di->resolveCombinationManager()->getCombinations($id);
 		$model->status = false;
 		$model->id = 3;
-		$model->name = $request->request->get("name");
+		$model->name = $request->request->get("message");
 		return $model;
 	}
 }
