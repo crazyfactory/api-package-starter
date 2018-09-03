@@ -1,0 +1,19 @@
+<?php
+namespace App\Console;
+
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+class $CLASS$ extends BaseCommand
+{
+	public function configure()
+	{
+		$this->setName('$NAME$')
+			->setDescription('$DESCRIPTION$');
+	}
+
+	protected function execute(InputInterface $input, OutputInterface $output)
+	{
+		throw new \Exception("Not implemented");
+	}
+}
