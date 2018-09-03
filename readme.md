@@ -49,3 +49,11 @@ $routeCollection->add("name", $this->get('/path/to/route', Controller::class, 'm
 - enter command name which will trigger that command
 - enter command description
 - register command to crazy.php
+
+### Important stuffs
+don't just randomly return stuff from controller method, even though you CAN return response, string or a plain array,
+it'll be rejected in PR from now onwards. Any response should be a proper type. For example: UserController:list shouldn't return array,
+It should return array of Users model, models are defined in `src/Models` directory.
+
+Similarly if a method expects something from POST body, it should only be submitted as a JSON data, and not form data. __fromString() method should be used to create that model. Model should take care of validating entirely.
+That should be clearly documented using @expects Params. This helps automatic generation of Sdk for later use.
